@@ -12,7 +12,7 @@ public class LoginPage extends BasePage {
 
 
 	public inputUsername(String username) {
-		try {			
+		try {
 			WebUI.setText(findByXpath(Locator.usernameField), username)
 			this.tars.screenshot("Input Usename", "Berhasil Input Username ${username}", TarsStatus.DONE)
 		} catch (e) {
@@ -21,19 +21,36 @@ public class LoginPage extends BasePage {
 	}
 
 	public inputPassword(String password) {
-		try {			
+		try {
 			WebUI.setText(findByXpath(Locator.passwordField), password)
-			this.tars.screenshot("Input Password", "Berhasil Input Password ${password}", TarsStatus.DONE)
+			this.tars.screenshot("Input Password", "Berhasil Input Password", TarsStatus.DONE)
 		} catch (e) {
 			this.errorHandling(e)
 		}
 	}
 
 	public clickLogin() {
-		try {			
+		try {
 			def logoImg = "	//div[@class='oxd-brand-logo']/img"
 			this.tars.screenshot("Click Login", "Berhasil Klik Login", TarsStatus.DONE)
 			WebUI.click(findByXpath(Locator.loginBtn))
+			WebUI.waitForElementPresent(findByXpath(logoImg), 5)
+			this.tars.screenshot("Validate Login", "Berhasil Login", TarsStatus.PASSED)
+		} catch (e) {
+			this.errorHandling(e)
+		}
+	}
+	
+	public login(String username, String password) {
+		try {
+			WebUI.setText(findByCSS(Locator.usernameFieldCss), username)
+			this.tars.screenshot("Input Usename", "Berhasil Input Username ${username}", TarsStatus.DONE)
+			WebUI.setText(findByCSS(Locator.passwordFieldCss), password)
+			this.tars.screenshot("Input Password", "Berhasil Input Password", TarsStatus.DONE)
+			this.tars.screenshot("Click Login", "Berhasil Klik Login", TarsStatus.DONE)
+			WebUI.click(findByCSS(Locator.loginBtnCss))
+			
+			def logoImg = "	//div[@class='oxd-brand-logo']/img"
 			WebUI.waitForElementPresent(findByXpath(logoImg), 5)
 			this.tars.screenshot("Validate Login", "Berhasil Login", TarsStatus.PASSED)
 		} catch (e) {

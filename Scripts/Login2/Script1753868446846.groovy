@@ -12,9 +12,7 @@ tars.createReport("SCN_LOGIN", "TC-01")
 
 WebUI.openBrowser("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
 
-loginPage.inputUsername("Admin")
-loginPage.inputPassword("admin123")
-loginPage.clickLogin()
+loginPage.login("Admin", "admin123")
 
 WebUI.closeBrowser()
 
